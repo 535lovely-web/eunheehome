@@ -9,13 +9,16 @@
   --header-h: 76px;
 }
 
-* { box-sizing: border-box; }
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 
 body {
   margin: 0;
   font-family: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
   color: var(--text-dark);
   line-height: 1.5;
+  overflow-x: hidden;
 }
 
 img, svg { max-width: 100%; display: block; }
@@ -79,11 +82,15 @@ ul, p, h1, h2, h3, h4 { margin: 0; padding: 0; }
 .nav-toggle {
   display: none;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 5px;
+  width: 44px;
+  height: 44px;
   background: none;
   border: none;
   cursor: pointer;
-  padding: 6px;
+  padding: 0;
   flex-shrink: 0;
 }
 .nav-toggle span { width: 24px; height: 2px; background: #fff; border-radius: 2px; }
@@ -171,11 +178,16 @@ ul, p, h1, h2, h3, h4 { margin: 0; padding: 0; }
 
 .hero-dots { position: relative; z-index: 2; display: flex; gap: 8px; margin-top: 28px; }
 .hero-dots span {
-  width: 8px; height: 8px; border-radius: 50%;
-  background: rgba(255,255,255,0.4);
+  width: 44px; height: 44px;
+  display: flex; align-items: center; justify-content: center;
   cursor: pointer;
 }
-.hero-dots span.is-active { background: var(--cyan); }
+.hero-dots span::before {
+  content: "";
+  width: 8px; height: 8px; border-radius: 50%;
+  background: rgba(255,255,255,0.4);
+}
+.hero-dots span.is-active::before { background: var(--cyan); }
 
 /* ---------- Sections generic ---------- */
 .section { padding: 90px 24px; text-align: center; }
@@ -355,7 +367,7 @@ ul, p, h1, h2, h3, h4 { margin: 0; padding: 0; }
     position: fixed;
     top: var(--header-h); right: 0;
     height: calc(100vh - var(--header-h));
-    width: 240px;
+    width: min(240px, 75vw);
     background: var(--navy-dark);
     flex-direction: column;
     padding: 32px 24px;
@@ -371,4 +383,30 @@ ul, p, h1, h2, h3, h4 { margin: 0; padding: 0; }
 
 @media (max-width: 560px) {
   .cert-grid, .business-grid, .teacher-grid { grid-template-columns: 1fr; }
+
+  .hero { min-height: 0; padding: calc(var(--header-h) + 32px) 20px 48px; }
+  .hero-slides { min-height: 180px; }
+  .hero-slide { gap: 14px; }
+  .hero-badge { font-size: 12px; padding: 8px 20px; }
+
+  .section { padding: 56px 20px; }
+
+  .edu-bar { padding: 18px 20px; font-size: 15px; }
+  .edu-bars { gap: 14px; margin-top: 32px; }
+
+  .cert-grid { gap: 32px 20px; margin-top: 40px; }
+
+  .business-grid { gap: 16px; margin-top: 32px; }
+  .business-card { padding: 24px 20px; }
+
+  .section-teachers-intro { min-height: 320px; padding: 72px 20px 40px; }
+  .teachers-badge { width: 170px; height: 170px; }
+  .teachers-badge span { font-size: 19px; }
+
+  .teacher-row { padding: 40px 20px; }
+  .teacher-grid { gap: 20px; }
+
+  .membership-detail { font-size: 14px; }
+
+  .site-footer { padding: 40px 20px 32px; }
 }
